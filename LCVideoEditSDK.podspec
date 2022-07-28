@@ -94,10 +94,10 @@ Pod::Spec.new do |spec|
 
 
   # 相对路径很重要，不正确无法引入SDK
-  spec.source_files = '../Thirdlibs/LCVideoEditSDK.framework/Headers/*.h'
-  spec.vendored_frameworks='../Thirdlibs/LCVideoEditSDK.framework/'
-  spec.public_header_files = '../Thirdlibs/LCVideoEditSDK.framework/*.h'
-  spec.resources = '../Thirdlibs/LCVideoEditSDK.framework/*'
+  spec.source_files = 'LCVideoEditSDK/LCVideoEditSDK.framework/Headers/*.h'
+  spec.vendored_frameworks='LCVideoEditSDK/LCVideoEditSDK.framework/'
+  spec.public_header_files = 'LCVideoEditSDK/LCVideoEditSDK.framework/*.h'
+  spec.resources = 'LCVideoEditSDK/LCVideoEditSDK.framework/*'
 
 
   # spec.resources  = 'LCVideoEditSDK.framework/*.bundle'
