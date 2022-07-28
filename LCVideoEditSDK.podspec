@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "LCVideoEditSDK"
-  spec.version      = "0.0.1"
+  spec.version      = "1.0.0"
   spec.summary      = "A short description of LCVideoEditSDK."
 
   # This description is used to generate tags and improve search results.
@@ -25,9 +25,10 @@ Pod::Spec.new do |spec|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   spec.description  = <<-DESC
+                        音视频剪辑SDK
                    DESC
 
-  spec.homepage     = "http://EXAMPLE/LCVideoEditSDK"
+  spec.homepage     = "https://github.com/iWolfSex/LCVideoEditSDK"
   # spec.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -38,8 +39,8 @@ Pod::Spec.new do |spec|
   #  Popular ones are 'MIT', 'BSD' and 'Apache License, Version 2.0'.
   #
 
-  spec.license      = "MIT (example)"
-  # spec.license      = { :type => "MIT", :file => "FILE_LICENSE" }
+  # spec.license      = "MIT"
+  spec.license      = { :type => "MIT", :file => "LICENSE" }
 
 
   # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -63,7 +64,8 @@ Pod::Spec.new do |spec|
   #  the deployment target. You can optionally include the target after the platform.
   #
 
-  # spec.platform     = :ios
+  spec.platform     = :ios
+  spec.platform     = :ios, "9.0"
   # spec.platform     = :ios, "5.0"
 
   #  When using multiple platforms
@@ -79,7 +81,7 @@ Pod::Spec.new do |spec|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  spec.source       = { :git => "http://EXAMPLE/LCVideoEditSDK.git", :tag => "#{spec.version}" }
+  spec.source       = { :git => "https://github.com/iWolfSex/LCVideoEditSDK.git", :tag => "#{spec.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -90,8 +92,15 @@ Pod::Spec.new do |spec|
   #  Not including the public_header_files will make all headers public.
   #
 
-  spec.source_files  = "Classes", "Classes/**/*.{h,m}"
-  spec.exclude_files = "Classes/Exclude"
+
+  # 相对路径很重要，不正确无法引入SDK
+  spec.source_files = 'Thirdlibs/LCVideoEditSDK.framework/Headers/*.h'
+  spec.vendored_frameworks='Thirdlibs/LCVideoEditSDK.framework'
+  spec.public_header_files = 'Thirdlibs/LCVideoEditSDK.framework/Headers/*.h'
+  spec.resources = 'Thirdlibs/LCVideoEditSDK.framework/*'
+
+
+  # spec.resources  = 'LCVideoEditSDK.framework/*.bundle'
 
   # spec.public_header_files = "Classes/**/*.h"
 
@@ -116,12 +125,14 @@ Pod::Spec.new do |spec|
   #  the lib prefix of their name.
   #
 
-  # spec.framework  = "SomeFramework"
-  # spec.frameworks = "SomeFramework", "AnotherFramework"
+  spec.frameworks = 
+  "UIKit", "OpenAL", "Accelerate", "ReplayKit", "AVFoundation", "WebKit", 
+  "AudioToolbox", "CoreGraphics", "CoreMedia", "CoreVideo", "MediaPlayer", 
+  "MobileCoreServices", "OpenGLES", "QuartzCore", "Foundation", "VideoToolbox"
 
-  # spec.library   = "iconv"
-  # spec.libraries = "iconv", "xml2"
+  spec.libraries = "sqlite3", "resolv", "c++", "z", "bz2"
 
+  spec.dependency 'AFNetworking', '4.0.1'
 
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -129,7 +140,7 @@ Pod::Spec.new do |spec|
   #  where they will only apply to your library. If you depend on other Podspecs
   #  you can include multiple dependencies to ensure it works.
 
-  # spec.requires_arc = true
+   spec.requires_arc = true
 
   # spec.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   # spec.dependency "JSONKit", "~> 1.4"
